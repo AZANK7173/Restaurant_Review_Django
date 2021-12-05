@@ -17,16 +17,19 @@ def list_posts(request):
 
 def create_post(request):
     if request.method == 'POST':
-        post_data.append({
-            'name': request.POST['name'],
-            'release_year': request.POST['release_year'],
-            'poster_url': request.POST['poster_url']
-        })
+        post_restaurant_name = request.POST['restaurant_name']
+        post_eval = request.POST['eval']
+        post_content = request.POST['content']
+        post_date_of_post = request.POST['date_of_post']
+        post_poster_url = request.POST['poster_url']
+
+        post = Post(restaurant_name=post_restaurant_name, eval=post_eval, content=post_content, date_of_post=post_date_of_post, 
+            poster_url=post_poster_url)
+
+        post.save()
         return HttpResponseRedirect(
-            reverse('posts:detail', args=(len(post_data), )))
+            reverse('posts:detail', args=(post.id, )))
     else:
         return render(request, 'posts/create.html', {})
-
-
 
 
