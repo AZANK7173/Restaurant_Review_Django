@@ -32,4 +32,29 @@ def create_post(request):
     else:
         return render(request, 'posts/create.html', {})
 
+def update_post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
 
+    if request.method == "POST":
+        post.restaurant_name = request.POST['restaurant_name']
+        post.eval = request.POST['eval']
+        post.content = request.POST['content']
+        post.date_of_post = request.POST['date_of_post']
+        post.poster_url = request.POST['poster_url']
+        post.save()
+        return HttpResponseRedirect(
+            reverse('posts:detail', args=(post.id, )))
+
+    context = {'post': post}
+    return render(request, 'posts/update.html', context)
+
+
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.method == "POST":
+        post.delete()
+        return HttpResponseRedirect(reverse('posts:index'))
+
+    context = {'post': post}
+    return render(request, 'posts/delete.html', context)
