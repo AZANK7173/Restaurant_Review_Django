@@ -3,6 +3,7 @@ from .temp_data import post_data
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import Post
+from django.views import generic
 
 def detail_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -58,3 +59,7 @@ def delete_post(request, post_id):
 
     context = {'post': post}
     return render(request, 'posts/delete.html', context)
+
+class PostListView(generic.ListView):
+    model = Post
+    template_name = 'posts/index.html'
