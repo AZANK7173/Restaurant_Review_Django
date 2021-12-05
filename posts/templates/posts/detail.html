@@ -5,13 +5,13 @@
 {% endblock title %}
 
 {% block content %}
-<h2>Detalhes do Post {{ post.name }} ({{ post.release_year }})</h2>
+<h2>Detalhes do Post {{ post.restaurant_name }} ({{ post.date_of_post }})</h2>
 
 <section class="dados-de-filme">
-    <img src="{{ post.poster_url }}" alt="Poster do filme {{ post.name}}">
+    <img src="{{ post.poster_url }}" alt="Foto do restaurante {{ post.restaurant_name}">
     <ul>
-        <li>Nome: {{ post.name }}</li>
-        <li>Ano de Lançamento: {{ post.release_year }} </li>
+        <li> Comentário geral: {{post.content}} </li>
+        <li> Avaliação Geral do Restaurante (Nota de 0 a 5): {{ post.eval }} </li>
     </ul>
 </section>
 
