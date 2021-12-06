@@ -12,6 +12,9 @@
     <ul>
         <li> Comentário geral: {{post.content}} </li>
         <li> Avaliação Geral do Restaurante (Nota de 0 a 5): {{ post.eval }} </li>
+        {% if post.category_set.all %}
+            <li>Categorias que participa: {{ post.category_set.all|join:", " }} </li>
+        {% endif %}
         <li><a href="{% url 'posts:update' post.id %}">Editar</a></li>
         <li><a href="{% url 'posts:delete' post.id %}">Apagar</a></li>
     </ul>

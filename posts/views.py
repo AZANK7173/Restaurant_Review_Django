@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from .temp_data import post_data
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
-from .models import Post, Review
+from django.urls import reverse, reverse_lazy
+from .models import Post, Review, Category
 from .forms import PostForm, ReviewForm
 from django.views import generic
 
@@ -98,3 +98,15 @@ def create_review(request, post_id):
         form = ReviewForm()
     context = {'form': form, 'post': post}
     return render(request, 'posts/review.html', context)
+
+
+class CategoryListView(generic.ListView):
+    model = Category
+    template_name = 'posts/categories.html'
+
+
+class CategoryCreateView(generic.CreateView):
+    model = Category
+    template_name = 'posts/create_categories.html'
+    fields = ['name', 'author', 'posts']
+    success_url = reverse_lazy('posts:categories')
