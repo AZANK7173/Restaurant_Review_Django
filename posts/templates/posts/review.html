@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Comentar Review do Restaurante{{ post.name }} do post feito em {{ post.release_year }}</h2>
+
+<form action="{% url 'posts:review' post.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Postar Comentário</button>
+</form>
+
+<p><a href="{% url 'posts:detail' post.id %}">Voltar para a página do Posts</a></p>
+{% endblock content %}

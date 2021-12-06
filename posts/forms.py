@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Post
+from .models import Post, Review
 
 class PostForm(ModelForm):
     class Meta:
@@ -17,4 +17,16 @@ class PostForm(ModelForm):
             'date_of_post': 'Data da ida no Restaurante',
             'content': 'Review de sua experiência',
             'poster_url': 'URL da foto do Restaurante',
+        }
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = [
+            'author',
+            'text',
+        ]
+        labels = {
+            'author': 'Usuário',
+            'text': 'Resenha',
         }

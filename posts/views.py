@@ -2,8 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .temp_data import post_data
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .models import Post
-from .forms import PostForm
+from .models import Post, Review
+from .forms import PostForm, ReviewForm
 from django.views import generic
 
 def detail_post(request, post_id):
@@ -79,3 +79,22 @@ def delete_post(request, post_id):
 class PostListView(generic.ListView):
     model = Post
     template_name = 'posts/index.html'
+
+
+def create_review(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review_author = form.cleaned_data['author']
+            review_text = form.cleaned_data['text']
+            review = Review(author=review_author,
+                            text=review_text,
+                            post=post)
+            review.save()
+            return HttpResponseRedirect(
+                reverse('posts:detail', args=(post_id, )))
+    else:
+        form = ReviewForm()
+    context = {'form': form, 'post': post}
+    return render(request, 'posts/review.html', context)

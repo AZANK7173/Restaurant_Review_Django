@@ -17,4 +17,32 @@
     </ul>
 </section>
 
+<hr>
+
+<section>
+    <header>
+        <h3>Comentários</h3>
+    </header>
+    <ul>
+        {% if post.review_set.all %}
+            {% for review in post.review_set.all %}
+                <figure>
+                    <blockquote>
+                        "{{ review.text }}"
+                    </blockquote>
+                    <figcaption>—{{ review.author }}
+                </figure>
+            {% endfor %}
+        {% else %}
+            <p>Ainda não existe nenhum Comentário para este restaurante.</p>
+        {% endif %}
+    </ul>
+
+    <hr>
+
+    <a href="{% url 'posts:review' post.pk %}"><button>Adicione um Comentário</button></a>
+
+</section>
+</section>
+
 {% endblock content %}
