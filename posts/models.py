@@ -17,6 +17,7 @@ class Post(models.Model):
 class Review(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
+    date_of_post = models.DateTimeField(auto_now=True, blank=True, null=True)
     text = models.CharField(max_length=255)
     likes = models.IntegerField(default=0)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -32,4 +33,4 @@ class Category(models.Model):
     posts = models.ManyToManyField(Post)
 
     def __str__(self):
-        return f'{self.name} by {self.author}'
+        return f'{self.name}'

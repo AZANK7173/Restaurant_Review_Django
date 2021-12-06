@@ -26,6 +26,7 @@ header#cabecalho-principal {
   width: 100%;
   max-width: 1080px;
   padding: 3rem 1rem;
+  background-color: #dfd5cf;
 
   display: flex;
   justify-content: space-between;
@@ -163,4 +164,15 @@ button:hover {
 .logo * {
   width:100px;
   height:100px;
+}
+
+.comentario {
+  background-color: #dfd5cf;
+  margin: 10px;
+}
+
+#texto_comentario {
+  background-color: #fff;
+  margin: 10px;
+  padding-bottom: 2px;
 }

@@ -19,7 +19,7 @@ Categorias
             <div class="card">
                 <a href="{% url 'posts:detail' post.id %}"><img src="{{ post.poster_url }}"
                         alt="Poster do filme {{ post.restaurant_name}}"></a>
-                <p>{{ post.name }} em {{ post.date_of_post }}</p>
+                <p>{{ post.restaurant_name }} em {{ post.date_of_post }}</p>
             </div>
             {% endfor %}
         </div>

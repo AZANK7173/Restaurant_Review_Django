@@ -5,16 +5,23 @@
 {% endblock title %}
 
 {% block content %}
-<h2>Detalhes do Post {{ post.restaurant_name }} ({{ post.date_of_post }})</h2>
+<h2>Restaurante {{ post.restaurant_name }} ({{ post.date_of_post }})</h2>
 
 <section class="dados-de-filme">
     <img src="{{ post.poster_url }}" alt="Foto do restaurante {{ post.restaurant_name}}">
     <ul>
-        <li> Comentário geral: {{post.content}} </li>
-        <li> Avaliação Geral do Restaurante (Nota de 0 a 5): {{ post.eval }} </li>
+        <h3> Comentário geral: </h3>
+        <li>{{post.content}}</li>
+        
+        <h3> Avaliação Geral do Restaurante (Nota de 0 a 5) </h3>
+        <li>{{ post.eval }}</li>
+
         {% if post.category_set.all %}
-            <li>Categorias que participa: {{ post.category_set.all|join:", " }} </li>
+        <h3>Categorias que participa: </h3>
+        <li>{{ post.category_set.all|join:", " }} </li>
         {% endif %}
+
+        <hr>
         <li><a href="{% url 'posts:update' post.id %}">Editar</a></li>
         <li><a href="{% url 'posts:delete' post.id %}">Apagar</a></li>
     </ul>
@@ -29,11 +36,11 @@
     <ul>
         {% if post.review_set.all %}
             {% for review in post.review_set.all %}
-                <figure>
-                    <blockquote>
-                        "{{ review.text }}"
+                <figure class="comentario">
+                    <p>{{ review.author }}, {{review.date_of_post}}</p>
+                    <blockquote id = 'texto_comentario'>
+                        {{ review.text }}
                     </blockquote>
-                    <figcaption>—{{ review.author }}
                 </figure>
             {% endfor %}
         {% else %}
